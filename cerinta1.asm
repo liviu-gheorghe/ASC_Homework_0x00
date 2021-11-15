@@ -11,6 +11,7 @@ tipToken: .space 4
 hexd: .space 12
 num: .long 4
 semn: .long 4
+prod: .long 1
 writeCharFormat: .asciz "%c "
 printNumFormat: .asciz "%d "
 instrLet: .asciz "let"
@@ -514,16 +515,26 @@ et_InterpretHexGroup:
 
 et_InterpretNumber:
 
-        movl %esi, %ebx
-        addl $0x04, %ebx
-        pushl $0x02
-        pushl $0x00
-        pushl %ebx
-        call strtol
-        popl %ebx
-        popl %ebx
-        popl %ebx
-        movl %eax, num
+        movl $0x00, num
+        movl $0x0B, %ecx
+        xorl %ebx, %ebx
+        movl $0x01, prod
+        et_InterpretNumber_Loop:
+            
+            cmp $0x3, %ecx
+            jle et_InterpretNumber_Cont
+            xorl %eax, %eax
+            movb (%esi, %ecx, 0x01), %al
+            subb $0x30, %al
+            imull prod
+            addl %eax, %ebx
+            movl %ebx, num
+            subl $0x01, %ecx
+            sall prod
+            jmp et_InterpretNumber_Loop
+
+        
+        et_InterpretNumber_Cont:
         xorl %ebx, %ebx
         movb 0x03(%esi), %bl
         subb $0x30, %bl
