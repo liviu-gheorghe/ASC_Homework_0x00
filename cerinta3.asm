@@ -13,6 +13,7 @@ rez: .long 4
 valori_vars: .space 104
 val_varCurent: .space 1
 writeNrFormat: .asciz "Numarul este %d\n"
+writeNewlineFormat: .asciz "\n"
 rezFormat: .asciz "%d"
 debugFormat: .asciz "Tokenul este {%s}\n"
 vfsFormat: .asciz "Nr din vf stivei este %d\n"
@@ -97,8 +98,8 @@ et_exit:
     popl %ebx
 
 
-    pushl $0x00
-    call fflush
+    pushl $writeNewlineFormat
+    call printf
     popl %ebx
 
     movl $0x1, %eax

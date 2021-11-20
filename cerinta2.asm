@@ -7,6 +7,7 @@ readInputFormat: .asciz "%[^\n]"
 tokenCurentPtr: .space 4
 lenToken: .long 0
 isNr: .space 1
+writeNewlineFormat: .asciz "\n"
 nrCurent: .space 4
 et_loop_Ctr: .long 0
 rez: .long 4
@@ -88,8 +89,8 @@ et_exit:
     popl %ebx
 
 
-    pushl $0x00
-    call fflush
+    pushl $writeNewlineFormat
+    call printf
     popl %ebx
 
     movl $0x1, %eax

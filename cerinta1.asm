@@ -5,6 +5,7 @@ readInputFormat: .asciz "%s"
 writeOutputFormat: .asciz "%s"
 writeInstrFormat: .asciz "%s "
 writeIntFormat: .asciz "%d"
+writeNewlineFormat: .asciz "\n"
 sirLen: .long 0
 hgIdx: .long 0
 tipToken: .space 4
@@ -611,8 +612,8 @@ et_InterpretInstr:
 
 et_exit:
 
-    pushl $0x00
-    call fflush
+    pushl $writeNewlineFormat
+    call printf
     popl %ebx 
 
     movl $0x01, %eax

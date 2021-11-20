@@ -6,6 +6,7 @@ m: .long 0
 sirInput: .space 1001
 sep: .asciz " "
 writeFormat: .asciz "%s\n"
+writeNewlineFormat: .asciz "\n"
 writeMDimFormat: .asciz "%d %d "
 readInputFormat: .asciz "%[^\n]"
 tokenCurentPtr: .space 4
@@ -458,8 +459,8 @@ et_BPutMatrixElem:
 
 et_exit:
 
-    pushl $0x00
-    call fflush
+    pushl $writeNewlineFormat
+    call printf
     popl %ebx
 
     movl $0x01, %eax
