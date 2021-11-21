@@ -15,6 +15,7 @@ semn: .long 4
 prod: .long 1
 writeCharFormat: .asciz "%c "
 printNumFormat: .asciz "%d "
+printMinusNumFormat: .asciz "-%d "
 instrLet: .asciz "let"
 instrAdd: .asciz "add"
 instrSub: .asciz "sub"
@@ -631,11 +632,9 @@ et_PrintNumber:
     jmp et_InterpretNumber_End
 
 et_PrintMinusNumber:
-    notl num
-    addl $0x01, num
 
     pushl num
-    pushl $printNumFormat
+    pushl $printMinusNumFormat
     call printf
     popl %ebx
     popl %ebx
