@@ -1,6 +1,6 @@
 .data
 
-sir: .space 101
+sir: .space 1001
 readInputFormat: .asciz "%s"
 writeOutputFormat: .asciz "%s"
 writeInstrFormat: .asciz "%s "

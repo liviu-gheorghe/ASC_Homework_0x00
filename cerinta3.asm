@@ -1,6 +1,6 @@
 .data
 
-sirInput: .space 301
+sirInput: .space 1001
 sep: .asciz " "
 writeFormat: .asciz "%s\n"
 readInputFormat: .asciz "%[^\n]"
